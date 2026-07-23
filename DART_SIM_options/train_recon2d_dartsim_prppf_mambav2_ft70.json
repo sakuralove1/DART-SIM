@@ -1,0 +1,57 @@
+{
+  // task
+  "data": "2d-sim"
+  , "model": "reconstruction"
+  , "supervise": "self-supervised-val"
+
+  // dataset
+  , "dataset_root": ""
+
+  // network
+  , "net_G": "dartsim_prppf_mambav2_ft70"
+  , "net_G_para1": "RLFB+ET+Conv3"
+  , "net_G_para2": "RLFB+DPMB+Conv3"
+  , "net_G_para3": true
+  , "net_G_para4": 48
+
+  // PR-PPF: 70% nominal / 30% jitter during fine-tuning
+  , "prppf_jitter_k0_scale": 0.01
+  , "prppf_jitter_k0_angle_deg": 0.5
+  , "prppf_jitter_phase": 0.05
+  , "prppf_jitter_random": true
+  , "prppf_jitter_prob": 0.30
+
+  // PR-PPF: symmetric internal pattern branches
+  , "prppf_sym_k0_scale": 0.0025
+  , "prppf_sym_k0_angle_deg": 0.125
+  , "prppf_sym_phase": 0.025
+
+  // training-init
+  , "pretrained_netG": null
+  , "pretrained_netG_partial": false
+  , "pretrained_netG_strict": true
+  , "init_type": "kaiming_normal"
+  , "init_gain": 0.2
+
+  // training-dataset
+  , "dataloader_num_workers": 4
+  , "dataloader_batch_size": 4
+  , "in_patch_size": 256
+  , "dataaug_random_angle_rotate": false
+
+  // training-optimization
+  , "G_lossfn_type": "mse"
+  , "G_drift_loss_weight": 0.0
+  , "G_optimizer_type": "adamw"
+  , "G_optimizer_lr": 5e-6
+  , "G_optimizer_weight_decay": 0.0
+  , "G_scheduler_type": "CosineAnnealingLR"
+  , "G_scheduler_IterNum": 10000
+  , "G_scheduler_MinLR": 1e-6
+
+  // checkpoint
+  , "num_iter_interval_val": 1000
+  , "num_iter_interval_save": 1000
+  , "num_iter_interval_print": 100
+  , "save_all_val_images": false
+}
